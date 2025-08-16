@@ -1,0 +1,92 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Astro + Sanity website' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav class='nav'>
+      <div class='container'>
+        <a href='/' class='nav__logo'>My Website</a>
+        <ul class='nav__menu'>
+          <li><a href='/'>Home</a></li>
+          <li><a href='/posts'>Posts</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <script>
+      import gsap from 'gsap';
+
+      // Animate page load
+      gsap.from('.nav', {
+        y: -100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+      });
+
+      gsap.from('main > *', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        delay: 0.3,
+      });
+    </script>
+  </body>
+</html>
+
+<style lang='scss'>
+  @import '../styles/global.scss';
+
+  .nav {
+    position: sticky;
+    top: 0;
+    background: $secondary;
+    border-bottom: 1px solid rgba($primary, 0.1);
+    padding: $spacing-sm 0;
+    z-index: 100;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary;
+    }
+
+    &__menu {
+      display: flex;
+      list-style: none;
+      gap: $spacing-md;
+
+      @include mobile {
+        gap: $spacing-sm;
+      }
+    }
+  }
+
+  main {
+    min-height: calc(100vh - 60px);
+    padding: $spacing-lg 0;
+  }
+</style>

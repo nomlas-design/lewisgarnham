@@ -1,0 +1,19 @@
+{
+  "name": "lewis-garnham",
+  "version": "1.0.0",
+  "author": "Declan O'Hara | nomlas.design",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=web & npm run dev --workspace=studio",
+    "dev:web": "npm run dev --workspace=web",
+    "dev:studio": "npm run dev --workspace=studio",
+    "build": "npm run build --workspace=web && npm run build --workspace=studio",
+    "build:web": "npm run build --workspace=web",
+    "build:studio": "npm run build --workspace=studio"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

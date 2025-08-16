@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPosts, urlFor } from '../../lib/sanity';
+
+export const prerender = false;
+
+const posts = await getPosts();
+---
+
+<Layout title='Posts - My Website'>
+  <div class='container'>
+    <h1>All Posts</h1>
+    <div class='posts-list'>
+      {
+        posts.map((post) => (
+          <article class='post-item'>
+            {post.mainImage && (
+              <img
+                src={urlFor(post.mainImage).width(400).height(250).url()}
+                alt={post.title}
+                class='post-item__image'
+              />
+            )}
+            <div class='post-item__content'>
+              <h2>{post.title}</h2>
+              <time>{new Date(post.publishedAt).toLocaleDateString()}</time>
+              <a href={`/posts/${post.slug.current}`}>Read more →</a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<style lang='scss'>
+  h1 {
+    margin-bottom: $spacing-lg;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .post-item {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: $spacing-md;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid rgba($primary, 0.1);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    &__image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      time {
+        color: rgba($primary, 0.5);
+      }
+    }
+  }
+</style>
