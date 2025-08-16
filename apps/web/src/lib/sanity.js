@@ -15,7 +15,7 @@ export function urlFor(source) {
 }
 
 // Helper functions for common queries
-export async function getPosts() {
+export async function getReviews() {
   return await client.fetch(`
     *[_type == "post"] | order(publishedAt desc) {
       _id,
@@ -26,20 +26,4 @@ export async function getPosts() {
       body
     }
   `);
-}
-
-export async function getPost(slug) {
-  return await client.fetch(
-    `
-    *[_type == "post" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      mainImage,
-      publishedAt,
-      body
-    }
-  `,
-    { slug }
-  );
 }

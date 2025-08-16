@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getPosts } from '../lib/sanity';
+import Layout from './Layout.astro';
+import { getReviews } from '../lib/sanity';
 
-const posts = await getPosts();
+const posts = await getReviews();
 ---
 
 <Layout title='Home - My Website'>
@@ -14,16 +14,7 @@ const posts = await getPosts();
 
     <section class='recent-posts'>
       <h2>Recent Posts</h2>
-      <div class='posts-grid'>
-        {
-          posts.slice(0, 3).map((post) => (
-            <article class='post-card'>
-              <h3>{post.title}</h3>
-              <a href={`/posts/${post.slug.current}`}>Read more →</a>
-            </article>
-          ))
-        }
-      </div>
+      <div class='posts-grid'></div>
     </section>
   </div>
 </Layout>
