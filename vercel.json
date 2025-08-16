@@ -1,12 +1,6 @@
 {
-  "buildCommand": "npm run vercel-build",
+  "buildCommand": "cd apps/web && npm run build",
   "outputDirectory": "apps/web/dist",
   "installCommand": "npm install",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/studio/(.*)",
-      "destination": "/studio/index.html"
-    }
-  ]
+  "framework": null
 }
