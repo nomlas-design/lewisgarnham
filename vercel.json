@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run vercel-build",
+  "framework": "astro",
+  "rewrites": [
+    {
+      "source": "/studio/(.*)",
+      "destination": "/studio/index.html"
+    }
+  ]
+}
